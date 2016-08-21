@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject ps;
 
 	private State state = State.up;
+	private bool isDead = false;
 	private Rigidbody rb;
 
 	private void Start () {
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update () {
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0) && !isDead) {
 			switch (state) {
 			case State.left:
 				state = State.up;
@@ -30,10 +31,24 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void OnTriggerEnter(Collider col) {
+	private void OnTriggerEnter (Collider col) {
 		if (col.gameObject.tag == "gem") {
 			col.gameObject.SetActive (false);
 			Instantiate (ps, col.gameObject.transform.position, Quaternion.Euler(new Vector3(270, 0, 0)));
+		}
+	}
+
+	private void OnTriggerExit (Collider col) {
+		if (col.tag == "platform") {
+			RaycastHit hit;
+
+			Ray downRay = new Ray (transform.position, Vector3.down);
+			if (!Physics.Raycast(downRay, out hit)) {
+				isDead = true;
+				if (transform.childCount > 0) {
+					transform.DetachChildren ();
+				}
+			}
 		}
 	}
 	
