@@ -6,6 +6,7 @@ enum State { left, up, down, right };
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	public GameObject ps;
 
 	private State state = State.up;
 	private Rigidbody rb;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 	private void OnTriggerEnter(Collider col) {
 		if (col.gameObject.tag == "gem") {
 			col.gameObject.SetActive (false);
+			Instantiate (ps, col.gameObject.transform.position, Quaternion.Euler(new Vector3(270, 0, 0)));
 		}
 	}
 	
