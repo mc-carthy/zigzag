@@ -13,10 +13,12 @@ public class PlayerController : MonoBehaviour {
 	private bool isDead = false;
 	private Rigidbody rb;
 	private ScoreKeeper sk;
+	private MenuManager mm;
 
 	private void Start () {
 		rb = GetComponent<Rigidbody>();
 		sk = FindObjectOfType<ScoreKeeper> ();
+		mm = FindObjectOfType<MenuManager> ();
 	}
 
 	private void Update () {
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 				isDead = true;
 				if (transform.childCount > 0) {
 					transform.DetachChildren ();
+					mm.ToggleMenu ();
 				}
 			}
 		}
