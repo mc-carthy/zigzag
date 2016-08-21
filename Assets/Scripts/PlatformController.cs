@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Platform : MonoBehaviour {
+public class PlatformController : MonoBehaviour {
 
 	private void OnTriggerExit (Collider col) {
 		if (col.gameObject.tag == "Player") {

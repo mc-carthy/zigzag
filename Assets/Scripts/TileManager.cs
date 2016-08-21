@@ -59,8 +59,14 @@ public class TileManager : MonoBehaviour {
 		} else {
 			GameObject temp = tiles.Pop ();
 			temp.SetActive (true);
-			temp.transform.position = new Vector3 (lastPlatform.transform.position.x, lastPlatform.transform.position.y, lastPlatform.transform.position.z + 1);
+			temp.transform.position = new Vector3 (lastPlatform.transform.position.x, lastPlatform.transform.position.y, lastPlatform.transform.position.z - 1);
 			lastPlatform = temp;
+		}
+
+		int gemChance = Random.Range (0, 10);
+
+		if (gemChance == 0) {
+			lastPlatform.transform.GetChild (0).gameObject.SetActive (true);
 		}
 
 		/*

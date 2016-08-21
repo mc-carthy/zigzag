@@ -23,9 +23,15 @@ public class PlayerController : MonoBehaviour {
 				break;
 			case State.up:
 				state = State.left;
-				rb.velocity = new Vector3 (0f, 0f, speed);
+				rb.velocity = new Vector3 (0f, 0f, -speed);
 				break;
 			}
+		}
+	}
+
+	private void OnTriggerEnter(Collider col) {
+		if (col.gameObject.tag == "gem") {
+			col.gameObject.SetActive (false);
 		}
 	}
 	
