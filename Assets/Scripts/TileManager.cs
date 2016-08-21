@@ -8,6 +8,16 @@ public class TileManager : MonoBehaviour {
 
 	private GameObject lastPlatform;
 
+	private static TileManager TM;
+	public static TileManager tm {
+		get {
+			if (TM == null) {
+				TM = GameObject.FindObjectOfType<TileManager> ();
+			}
+			return TM;
+		}
+	}
+
 	private void Start () {
 		lastPlatform = Instantiate (platform) as GameObject;
 		lastPlatform.transform.SetParent (this.transform);
