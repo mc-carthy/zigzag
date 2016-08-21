@@ -7,13 +7,16 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 	public GameObject ps;
+	public int score = 0;
 
 	private State state = State.up;
 	private bool isDead = false;
 	private Rigidbody rb;
+	private ScoreKeeper sk;
 
 	private void Start () {
 		rb = GetComponent<Rigidbody>();
+		sk = FindObjectOfType<ScoreKeeper> ();
 	}
 
 	private void Update () {
@@ -35,6 +38,8 @@ public class PlayerController : MonoBehaviour {
 		if (col.gameObject.tag == "gem") {
 			col.gameObject.SetActive (false);
 			Instantiate (ps, col.gameObject.transform.position, Quaternion.Euler(new Vector3(270, 0, 0)));
+			score++;
+			sk.UpdateScore ();
 		}
 	}
 
