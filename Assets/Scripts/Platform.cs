@@ -13,5 +13,10 @@ public class Platform : MonoBehaviour {
 	private IEnumerator Fall () {
 		yield return new WaitForSeconds (1f);
 		GetComponent<Rigidbody> ().isKinematic = false;
+
+		yield return new WaitForSeconds (1f);
+		TileManager.tm.Tiles.Push (gameObject);
+		gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+		gameObject.SetActive (false);
 	}
 }
